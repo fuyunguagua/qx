@@ -1,8 +1,10 @@
-采用了scrapy-redis做了一个分布式的爬虫。最后用mysql存储数据。需要事先安装以及配置好redis以及mysql。
+采用了scrapy-redis做了一个分布式的爬虫。目标是穷游网上的行程信息
+用法：
+将项目导入到pycharm中，在本地安装好redis和mongodb，运行run.py
+已实现：
+将爬取到的行程的概览信息存入到mongodb中
+TODO:
+将最终的行程信息存入到mongodb中。
+实现增量爬取。
 
-进入工程后，scrapy crawl myspider_58page运行这个命令就会开始爬页码直到最后结束。需要在redis中给出初始页码。
-
-scrapy crawl myspider_58运行这个命令就会开始爬取具体的个人卖家的信息，会存储在相应的mysql表中。
-
-上述2个爬虫都可以多开来达到多进程爬取的效果。
 
