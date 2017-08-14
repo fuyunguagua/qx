@@ -90,6 +90,7 @@ COOKIES_ENABLED = False
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'qyxc.middlewares.RandomUserAgent': 100,
+    'qyxc.middlewares.CompleteRequste': 200,
 }
 
 # Enable or disable extensions

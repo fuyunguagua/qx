@@ -3010,12 +3010,548 @@ newtest = '''
 '''
 <a data-bn-ipg="pages-5" data-ra_arg="ra_null|2" data-page="2" href="http://plan.qyer.com/search_0_0_240_0_0_0_2/?cityid=6606" class='ui_page_item ui_page_next' title="下一页">下一页</a>
 '''
-from scrapy.selector import Selector
-select = Selector(text=newtest)
-rp1 = select.re('href=\"(http:.*\d)\" class=\"ui_page_item ui_page_next\"')[0]
-print(rp1)
-#rp2 = p1.search(test)
 
+from scrapy.selector import Selector
+def restractUrl():
+    from scrapy.selector import Selector
+    select = Selector(text=newtest)
+    rp1 = select.re('href=\"(http:.*\d)\" class=\"ui_page_item ui_page_next\"')
+    print(rp1)
+
+
+head = '''
+<header>
+      <h2>D1</h2>
+      <div class="text-container vm">
+        <div class="vm-inner">
+<h3>12月27日<span class="sep">|</span><span class="copy-day" data-id="33871605" data-bn-ipg="planview-day-head-copyday">复制单日行程</span></h3>
+    <h4>
+        <a href="//place.qyer.com/singapore/" target="_blank" data-bn-ipg="planview-content-city">新加坡&nbsp;Singapore</a>
+        <em class="iconfont"></em>
+        <a href="//place.qyer.com/siem-reap/" target="_blank" data-bn-ipg="planview-content-city">暹粒&nbsp;Siem Reap</a>
+        </h4>
+            </div>
+          </div>
+        </header>
+'''
+dayDiv = '''
+<div class="day" data-day-index="0">
+        <!-- 一天的头部 -->
+        <header>
+          <h2>D1</h2>
+          <div class="text-container vm">
+            <div class="vm-inner">
+                                              <h3>09月27日<span class="sep">|</span><span class="copy-day" data-id="89490142" data-bn-ipg="planview-day-head-copyday">复制单日行程</span></h3>
+                            <h4>
+                                                                                                <span>上海&nbsp;Shanghai</span>
+                                                                              <em class="iconfont"></em>
+                                                              <a href="//place.qyer.com/kathmandu/" target="_blank" data-bn-ipg="planview-content-city">加德满都&nbsp;Kathmandu</a>
+                                                                    </h4>
+            </div>
+          </div>
+        </header> 
+
+                            
+          <!-- 遍历交通 -->
+                                <article class="traffic clearfix" data-onedayid="89490142" data-lat="" data-lng="" data-id="415482191" data-pid="11595" data-to_id="415482192" data-to_pid="11799" data-to_lat="25.085682" data-to_lng="102.921852" data-to_traffic_poi_id="205700" data-to_traffic_poi_name="昆明长水国际机场" data-cnname="" data-enname="" data-type="traffic">
+        <div class="dotted bottom"></div>
+              <figure>
+                                                                                                                                                      <img src="//common3.qyerstatic.com/plan/mobile/shared/img/default_pic/400x300/traffic_plane.jpg" onerror="this.src='//common3.qyerstatic.com/plan/mobile/shared/img/default_pic/400x300/traffic_plane.jpg'">
+                              </figure>
+    <section>
+    <!-- 交通 -->
+          <dl class="clearfix">
+                  <dt>出发：</dt>
+          <dd>
+            <span class="ellipsis" title="上海（上海虹桥国际机场）">
+              上海
+                              （上海虹桥国际机场）
+                          </span>
+                          <time>
+                08:15              </time>
+                      </dd>
+                          <dt>到达：</dt>
+          <dd>
+            <span class="ellipsis" title="昆明（昆明长水国际机场）">
+              昆明
+                              （昆明长水国际机场）
+                          </span>
+                          <time>
+                11:45                              </time>
+                      </dd>
+              </dl>
+      <ul>
+        <!-- 花费 -->
+                <!-- 备注 -->
+                <!-- 距离 -->
+        <li>
+  <em class="iconfont"></em>
+                          <span>距离：1957KM，98%的用户选择了飞机，平均用时3小时。</span>
+</li>
+      </ul>
+    
+    <!-- 优选 -->
+    
+    <!-- 景点 -->
+    
+    <!-- 酒店 -->
+      </section>
+
+</article>
+
+<!-- 点对点交通 -->
+<div class="sep" data-status="finish" data-bn-ipg="planview-content-traffic" data-tripmode="">
+  <em class="iconfont"></em>
+  <span>1771.68km</span>
+</div>
+
+<!-- 0 -->
+                      <article class="traffic clearfix" data-onedayid="89490142" data-lat="" data-lng="" data-id="417578162" data-pid="11799" data-to_id="417578163" data-to_pid="59" data-to_lat="27.696863" data-to_lng="85.359177" data-to_traffic_poi_id="33836" data-to_traffic_poi_name="特里布万国际机场" data-cnname="" data-enname="" data-type="traffic">
+      <div class="dotted top"></div>
+        <div class="dotted bottom"></div>
+              <figure>
+                                                                                                                                                      <img src="//common3.qyerstatic.com/plan/mobile/shared/img/default_pic/400x300/traffic_plane.jpg" onerror="this.src='//common3.qyerstatic.com/plan/mobile/shared/img/default_pic/400x300/traffic_plane.jpg'">
+                              </figure>
+    <section>
+    <!-- 交通 -->
+          <dl class="clearfix">
+                  <dt>出发：</dt>
+          <dd>
+            <span class="ellipsis" title="昆明（昆明长水国际机场）">
+              昆明
+                              （昆明长水国际机场）
+                          </span>
+                          <time>
+                14:25              </time>
+                      </dd>
+                          <dt>到达：</dt>
+          <dd>
+            <span class="ellipsis" title="加德满都（特里布万国际机场）">
+              加德满都
+                              （特里布万国际机场）
+                          </span>
+                          <time>
+                15:35                              </time>
+                      </dd>
+              </dl>
+      <ul>
+        <!-- 花费 -->
+                <!-- 备注 -->
+                <!-- 距离 -->
+        <li>
+  <em class="iconfont"></em>
+                          <span>距离：3310KM，100%的用户选择了飞机，平均用时3小时。</span>
+</li>
+      </ul>
+    
+    <!-- 优选 -->
+    
+    <!-- 景点 -->
+    
+    <!-- 酒店 -->
+      </section>
+
+</article>
+
+<!-- 点对点交通 -->
+<div class="sep" data-status="finish" data-bn-ipg="planview-content-traffic" data-tripmode="driving">
+  <em class="iconfont"></em>
+  <span>9.29km</span>
+</div>
+
+<!-- 1 -->
+          
+          <!-- 遍历POI -->
+                                                            <article class="poi clearfix" data-onedayid="89490142" data-lat="27.702770" data-lng="85.316452" data-id="418262132" data-pid="33818" data-to_id="" data-to_pid="" data-to_lat="" data-to_lng="" data-to_traffic_poi_id="" data-to_traffic_poi_name="" data-cnname="从泰米尔到杜巴广场老城区" data-enname="Thamel - Durbar Square" data-type="poi">
+      <div class="dotted top"></div>
+        <div class="dotted bottom"></div>
+            <a href="http:////place.qyer.com/poi/V2cJYFFuBzdTbA/" target="_blank" data-bn-ipg="planview-content-poi-pic">
+        <figure>
+                                                                                                            <img src="http://pic1.qyer.com/album/1af/cf/1839264/index/308x240" onerror="this.src='//common3.qyerstatic.com/plan/mobile/shared/img/default_pic/400x300/poi_default.jpg'">
+                          <figcaption>必去</figcaption>
+                      </figure>
+      </a>
+    <section>
+    <!-- 交通 -->
+    
+    <!-- 优选 -->
+    
+    <!-- 景点 -->
+          <h5 class="ellipsis">
+                  <a title="从泰米尔到杜巴广场老城区&nbsp;Thamel - Durbar Square" href="http://place.qyer.com/poi/V2cJYFFuBzdTbA/" target="_blank" data-bn-ipg="planview-content-poi-title">从泰米尔到杜巴广场老城区&nbsp;Thamel - Durbar Square</a>
+              </h5>
+      <p>
+                                    <em class="iconfont green"></em>
+                    <em class="iconfont green"></em>
+                    <em class="iconfont green"></em>
+                    <em class="iconfont green"></em>
+                    <em class="iconfont gray"></em>
+                                <span class="green">8.6分</span>
+                                    <em class="sep"></em>
+          <span>252人点评</span>
+                          <span class="right">加德满都景点榜<i class="red">第2位</i></span>
+              </p>
+      <ul>
+        <!-- 花费 -->
+                <!-- 时间 -->
+                <!-- 备注 -->
+              </ul>
+              <cite>
+          <figure>
+            <a href="//www.qyer.com/u/4099134" target="_blank" data-bn-ipg="planview-content-poi-user">
+              <img src="http://pic1.qyer.com/avatar/004/09/91/34/1476435876/index/48?v=1476435876" alt="很给力的范范">
+            </a>
+          </figure>
+          <div class="text-container">
+            <em>
+              <a href="//www.qyer.com/u/4099134" target="_blank" data-bn-ipg="planview-content-poi-user">
+                很给力的范范
+              </a>
+              ：
+            </em>
+            “小鸟在前面带路，风儿吹向我们”只是“你是风儿我是沙...”尘土飞扬啊尘土飞扬。的确比较落后，但是充满生活气息，对上眼了给你个微笑的是路人，来句“你好”但是不惹人讨厌保持距离跟着在旁边的是商人。很努力生存的人们，琳琅满目的商品。努力讲价，如果看到有妇女背着瓶装水在卖，可以支持一下。电线杆的线看起来很危险啊....到处是狗，鸽子和牛。
+          </div>
+        </cite>
+          
+    <!-- 酒店 -->
+      </section>
+
+</article>
+
+<!-- 点对点交通 -->
+<div class="sep" data-status="finish" data-bn-ipg="planview-content-traffic" data-tripmode="">
+  <em class="iconfont"></em>
+  <span>1.27km</span>
+</div>
+
+<!-- 2 -->
+                                                            <article class="poi clearfix" data-onedayid="89490142" data-lat="27.714134" data-lng="85.314835" data-id="418758532" data-pid="86518" data-to_id="" data-to_pid="" data-to_lat="" data-to_lng="" data-to_traffic_poi_id="" data-to_traffic_poi_name="" data-cnname="梦想花园" data-enname="Dream Garden" data-type="poi">
+      <div class="dotted top"></div>
+        <div class="dotted bottom"></div>
+            <a href="http:////place.qyer.com/poi/V2wJZVFjBzdTbA/" target="_blank" data-bn-ipg="planview-content-poi-pic">
+        <figure>
+                                                                                                            <img src="http://pic1.qyer.com/album/user/1606/57/QE9VRB8AZUw/index/308x240" onerror="this.src='//common3.qyerstatic.com/plan/mobile/shared/img/default_pic/400x300/poi_default.jpg'">
+                              </figure>
+      </a>
+    <section>
+    <!-- 交通 -->
+    
+    <!-- 优选 -->
+    
+    <!-- 景点 -->
+          <h5 class="ellipsis">
+                  <a title="梦想花园&nbsp;Dream Garden" href="http://place.qyer.com/poi/V2wJZVFjBzdTbA/" target="_blank" data-bn-ipg="planview-content-poi-title">梦想花园&nbsp;Dream Garden</a>
+              </h5>
+      <p>
+                                    <em class="iconfont green"></em>
+                    <em class="iconfont green"></em>
+                    <em class="iconfont green"></em>
+                    <em class="iconfont green"></em>
+                    <em class="iconfont gray"></em>
+                                <span class="green">8.4分</span>
+                                    <em class="sep"></em>
+          <span>62人点评</span>
+                          <span class="right">加德满都景点榜<i class="red">第19位</i></span>
+              </p>
+      <ul>
+        <!-- 花费 -->
+                <!-- 时间 -->
+                <!-- 备注 -->
+              </ul>
+              <cite>
+          <figure>
+            <a href="//www.qyer.com/u/1611281" target="_blank" data-bn-ipg="planview-content-poi-user">
+              <img src="http://pic1.qyer.com/avatar/001/61/12/81/index/48?v=" alt="FightingDarcy">
+            </a>
+          </figure>
+          <div class="text-container">
+            <em>
+              <a href="//www.qyer.com/u/1611281" target="_blank" data-bn-ipg="planview-content-poi-user">
+                FightingDarcy
+              </a>
+              ：
+            </em>
+            说实话是一般般的，还不如我们家楼下的湖岸公园好看一些= =但是这是在加都啊。里面有许多可爱的小松鼠，会跑来跟你抢面包吃。里面还有一家餐厅，东西做得很漂亮，口味一般般。他们会送面包，可以拿来喂小松鼠哈哈哈。
+          </div>
+        </cite>
+          
+    <!-- 酒店 -->
+      </section>
+
+</article>
+
+<!-- 点对点交通 -->
+<div class="sep" data-status="finish">
+  <em class="iconfont"></em>
+  <span>地理位置信息缺失</span>
+</div>
+
+<!-- 3 -->
+                                                            <article class="poi clearfix" data-onedayid="89490142" data-lat="" data-lng="" data-id="418759729" data-pid="98682" data-to_id="" data-to_pid="" data-to_lat="" data-to_lng="" data-to_traffic_poi_id="" data-to_traffic_poi_name="" data-cnname="" data-enname="GreenLine" data-type="poi">
+      <div class="dotted top"></div>
+              <a href="http:////place.qyer.com/poi/V20Ja1FgBz5TZg/" target="_blank" data-bn-ipg="planview-content-poi-pic">
+        <figure>
+                                                                                                                                              <img src="http://pic.qyer.com/album/user/1580/77/QExdQh0AZEs/index/308x240" onerror="this.src='//common3.qyerstatic.com/plan/mobile/shared/img/default_pic/400x300/poi_traffic.jpg'">
+                              </figure>
+      </a>
+    <section>
+    <!-- 交通 -->
+    
+    <!-- 优选 -->
+    
+    <!-- 景点 -->
+          <h5 class="ellipsis">
+                  <a title="&nbsp;GreenLine" href="http://place.qyer.com/poi/V20Ja1FgBz5TZg/" target="_blank" data-bn-ipg="planview-content-poi-title">&nbsp;GreenLine</a>
+              </h5>
+      <p>
+                                    <em class="iconfont green"></em>
+                    <em class="iconfont green"></em>
+                    <em class="iconfont green"></em>
+                    <em class="iconfont green"></em>
+                    <em class="iconfont gray"></em>
+                                <span class="green">8.4分</span>
+                                    <em class="sep"></em>
+          <span>5人点评</span>
+                          <span class="right">加德满都交通榜<i class="red">第9位</i></span>
+              </p>
+      <ul>
+        <!-- 花费 -->
+                <!-- 时间 -->
+                <!-- 备注 -->
+              </ul>
+              <cite>
+          <figure>
+            <a href="//www.qyer.com/u/4876604" target="_blank" data-bn-ipg="planview-content-poi-user">
+              <img src="http://pic1.qyer.com/avatar/004/87/66/04/1453113025/index/48?v=1453113030" alt="琳姨">
+            </a>
+          </figure>
+          <div class="text-container">
+            <em>
+              <a href="//www.qyer.com/u/4876604" target="_blank" data-bn-ipg="planview-content-poi-user">
+                琳姨
+              </a>
+              ：
+            </em>
+            奇旺没有Greenline直接返回加德满都，但是奇旺为愿意花钱的游客设置了接驳Greenline的专车。由于从博卡拉去奇旺时乘坐那种“Tourests Only”吃了苦头，我们要求换乘Greenline。结果，每人补交20美元，一部舒适的空调公务车把我们几个从奇旺送到吃午餐的地方，让我们在这里吃过免费午餐后，转车上了从博卡拉返程加德满都的Greenline。 <br>
+       这一天，在离加德满都不远的山上，路上大塞车，车辆排在险要狭窄的山道上，一部接着一部，延绵十几公里。这一次，我们被堵了差不多三个小时。不幸之中万幸的是：我们换了Greenline！
+          </div>
+        </cite>
+          
+    <!-- 酒店 -->
+      </section>
+
+</article>
+
+<!-- 点对点交通 -->
+
+<!-- 4 -->
+          
+          <!-- 遍历酒店 -->
+                    
+          <!-- 遍历笔记 -->
+          
+              </div>'''
+import re
+def restractHeaderInfoForOneDay(headText):
+    #提取每一天的头部信息
+    info = dict()
+    day_index_p = re.compile('<h2>(.*)</h2>')
+    date_p = re.compile('<h3>(\w*)<span')
+    line_p = re.compile('<a href.*?>(.*?)</a>')#非贪婪形式
+    info['date'] = date_p.findall(headText)[0]
+    info['day_index'] = day_index_p.findall(headText)[0]
+    pos = line_p.findall(headText)
+    pos = [filter_text2(filter_text2(x,'&nbsp;'),'\xa0') for x in pos]
+    info['line'] = pos
+    return info
+def filter_text2(text,flag):
+    if text.find(flag) is -1:
+        return text
+    else:
+        return text.replace(flag,' ')
+
+'''
+@:parameter text 要匹配的文本
+@:parameter regex 正则表达式
+@:parameter func 对匹配结果处理的函数
+
+@:return the result as a list
+'''
+def restract(regex, text, func=None ):
+    pattern = re.compile(regex,re.S)
+    r = pattern.findall(text)
+    if func is None:
+        return r
+    else:
+        if callable(func):
+            func(r)
+        else:
+            raise Exception('参数三不可被调用')
+
+def showResult(list):
+    for i, item in enumerate(list):
+        print(i,item)
+
+
+def restractPoiArticle(poiText):
+    #种类为景点的article
+    info = dict()
+    posNameRe ='<h5 class="ellipsis".*?<a title="(.*?)"'#景点名
+    posNameWithSpanRe = '<h5 class="ellipsis".*?<(?:a|span) title="(.*?)"'
+    scoreRe = '>(...)分' #得分
+    peopleNumRe = '(\d*)人点评'
+    bangNameRe = u'right.*\"(.*)榜'
+    rankRe = '第(\d*)位'
+    posInfoRe = 'planview-content-poi-user.*</em>(.*?)</div>'
+    posName = restract(posNameWithSpanRe, poiText)
+    score = restract(scoreRe,poiText)
+    peopleNum = restract(peopleNumRe,poiText)
+    rankName = restract(bangNameRe,poiText)
+    rank = restract(rankRe,poiText)
+    posInfo = restract(posInfoRe,poiText)
+    if len(posName) is not 0:
+        info['posName'] = filter_text2(filter_text2(posName[0],'&nbsp;'),'\xa0')
+    else:
+        info['posName'] = ''
+
+    if len(score) is not 0:
+        info['score'] = score[0]
+    else:
+        info['score'] = ''
+
+    if len(peopleNum) is not 0:
+        info['peopleNumOfCom'] = peopleNum[0]
+    else:
+        info['peopleNumOfCom'] = ''
+
+    if len(rankName) is not 0:
+        info['rankName'] = rankName[0].replace('>','')
+    else:
+        info['rankName'] = ''
+
+    if len(rank) is not 0:
+        info['rank'] = rank[0]
+    else:
+        info['rank'] = ''
+
+    if len(posInfo) is not 0:
+        info['posInfo'] = posInfo[0].strip()
+    else:
+        info['posInfo'] = ''
+
+    if poiText.find('自定义') is not -1:
+        info['type'] = '自定义'
+
+    return info
+def restractTrafficeArticle(trafficText):
+    #提取traffic信息
+    info = dict()
+    artrifficRe = '<dd>.*?<span class="ellipsis" title="(.*?)">.*?</span>\s*?(?:<time>\s*(\S*?)\s*</time>)?\s*?</dd>'#提取当天航线信息，飞机和时间
+    trifficSuggRe = '<span>(距离.*?)</span>'#建议 距离：1957KM，98%的用户选择了飞机，平均用时3小时。
+    info['traffic'] = restract(artrifficRe,trafficText)
+    info['sugg'] = restract(trifficSuggRe,trafficText)
+    return info
+from qx.guojia import hotel
+def restractHotelArticle(hotelText):
+    info = dict()
+    hotelNameRe = '<a title=\"(.*?)\"'
+    scoreRe = '用户评分(.*?)分'
+    priceRe = '<b class="\w*">(\d*)</b>'
+    addressRe = '<li class="place">(.*?)</li>'
+    aroundPoiRe = '<b>(.*?)</b>'      #附近景点
+    resonOfRecommendRe = '<li class="ellipsis" title="(.*?)">'#推荐理由
+    info['hotelName'] = restract(hotelNameRe,hotelText)[0]
+    score = restract(scoreRe,hotelText)
+    price = restract(priceRe,hotelText)
+    addressTemp = restract(addressRe, hotelText)
+    info['score'] = score[0] if len(score) is not 0 else ''
+    info['price'] = price[0] if len(price) is not 0 else ''
+    info['address'] = restract('<a.*?>(.*?)</a>',addressTemp[0]) if len(addressTemp) is not 0 else []
+    info['arounfPoi'] = restract(aroundPoiRe,hotelText)
+    info['resonOfRecommend'] = restract(resonOfRecommendRe,hotelText)
+    return info
+def getArtileAsListForOneDay(dayText):
+    infoList = []
+    articleRe = '<article.*?</article>'#当前Day的所有article
+    articleTexts = restract(articleRe, dayText)
+    articleInfo = dict()
+    for articleText in articleTexts:
+        if articleText.find('class="hotel clearfix"') is not -1:
+            articleInfo = restractHotelArticle(hotelText=articleText)
+        elif articleText.find('class="poi clearfix"') is not -1:
+            articleInfo = restractPoiArticle(poiText=articleText)
+        elif articleText.find('class="traffic clearfix"') is not -1:
+            articleInfo = restractTrafficeArticle(trafficText=articleText)
+        infoList.append(articleInfo)
+    return infoList
+def getDistinceAsListForOneDay(dayText):
+    infoList = []
+    sepRe = '<div class="sep".*?</div>'#提取Day块的所有行走方式Div
+    sepDisRe = '<span>(.*)</span>'
+    li = restract(sepRe,dayText)
+    for item in li:
+        pattern = re.compile(sepDisRe,re.S)
+        infoList.append(pattern.findall(item)[0])
+    return infoList
+def getHeaderAsDict(dayText):
+    headerRe = '<header>.*?</header>'
+    headerText = restract(headerRe,dayText)[0]
+    return restractHeaderInfoForOneDay(headerText)
+#提取每一天的信息
+def restractDayInfo(dayText):
+    infoList = []
+    headerInfoDict = getHeaderAsDict(dayText)
+    articleList = getArtileAsListForOneDay(dayText)
+    distinceList = getDistinceAsListForOneDay(dayText)
+    infoList.append(headerInfoDict)
+    if len(articleList) is 0:
+        infoList.append('当日暂无行程安排')
+        return infoList
+    for index, distinceinfo in enumerate(distinceList):
+        infoList.append(articleList[index])
+        infoList.append(distinceinfo)
+    infoList.append(articleList[-1])
+    return infoList
+def restractXCInfo(response):
+    from scrapy.selector import Selector
+    infoList = []
+    select = Selector(response)
+    daysText = select.xpath("//div[@class='day']").extract()
+    for dayText in  daysText:
+        dayInfoList = restractDayInfo(dayText)
+        infoList.append(dayInfoList)
+        print(dayInfoList)
+        print('-------' * 20)
+    return infoList
+def main():
+    articleRe = '<article.*?</article>'#当前Day的所有article
+    sepRe = '<div class="sep".*?</div>'#提取Day块的所有行走方式Div
+    sepDisRe = '<span>(.*)</span>'
+    #种类为traffic的article
+    artrifficRe = '<span class="ellipsis" title="(.*?)">.*?<time>\s*(\S*?)\s*</time>'#提取当天航线信息，飞机和时间
+    trifficSuggRe = '<span>(距离.*?)</span>'#建议 距离：1957KM，98%的用户选择了飞机，平均用时3小时。
+    #种类为景点的article
+    posNameRe = 'planview-content-poi-title\">(.*?)</a>'#景点名
+    scoreRe = '>(...)分' #得分
+    peopleNumRe = '(\d*)人点评'
+    bangNameRe = u'right.*\"(.*)榜'
+    rankRe = '第(\d*)位'
+    posInfoRe = 'planview-content-poi-user.*</em>(.*?)</div>'
+    #print(restract('jijiji','nihao')[0])
+    from qx.guojia import xingcheng
+    restractXCInfo(xingcheng)
+
+    #restract(posInfoRe,text=poi,func=showResult)
+    #result = restractPoiArticle(poiText=poi)
+    #result = restractTrafficeArticle(traffic)
+    #print(result)
+    #print(restractHotelArticle(hotel))
+#li = restract(sepRe,dayDiv)
+ #restractInfoFromResult(list=li,regex=sepDisRe,func=showResult)
+#restract(dayDiv, articleRe)
+                #restractHeaderInfo()
+  #restarctXCInfo()
+    #rp2 = p1.search(test)
 
 #p1 = re.compile('<ul class="clearfix" style="display:none;">(.*?)</ul>',re.S) #这个正则表达式会找的7个匹配<ul></ul>
 #rp1 = select.re(p1)
@@ -3024,25 +3560,7 @@ print(rp1)
 #for i in range(len(rp2.groups())):
  #   print(rp2.group(i))
 #rp1 = p1.findall(test)
-'''
-p2 = re.compile(u'<a data-id="\d*" data-key="\D*" href="(http://.*)">(.*)</a>')
 
-for index,i in enumerate(rp1):
-    rp2 = p2.findall(i)
-    for j in rp2:
-        print(j[1],j[0],index+1)
-    print('-------'*20)
-'''
-
-'''
-
-for i in range(len(r.groups())):
-    print(r.group(i))
-    print('444444'*10)
-result = testpa1.findall(test)
-for i,item in enumerate(result):
-    #print(i,item)
-    pass
-    '''
-
+if __name__ == '__main__':
+    main()
 
