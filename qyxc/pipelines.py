@@ -79,7 +79,7 @@ class MongoPipeline(object):
         self.db = self.client[self.db_name]
 
     def process_item(self, item, spider):
-        choice  = {'myspider_qypage':'qy_url_info','qy_con_spider':'qy_con_info'}
+        choice  = {'myspider_qypage':'qy_url_info','qy_con_spider':'qy_con_info','qy_xingcheng_spider':'qy_xc_info'}
         collection_name = choice.get(spider.name, None)
         data= dict(item)
         if isinstance(data,dict):
