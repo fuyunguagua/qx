@@ -26,6 +26,9 @@ class ContryItem(scrapy.Item):
     url = scrapy.Field()
     con_id = scrapy.Field()#洲的ID作为外键
 
+class TrackItem(scrapy.Item):
+    url = scrapy.Field()
+    data = scrapy.Field()
 
 class Pbdnof58Loader(ItemLoader):
     default_item_class = QYURLItem
