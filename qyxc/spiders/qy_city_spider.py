@@ -1,11 +1,8 @@
 from ..scrapy_redis.spiders import RedisSpider
 from ..items import Pbdnof58Loader
 from ..redis import Redis
-from scrapy import log
-from ..items import QYURLItem
-import re
-from ..utils import Redis_utils
-from time import sleep
+from qx.qyxc.utils import Redis_utils
+
 from scrapy.selector import Selector
 
 #pull urls from contry list,restract urls and push to redis
@@ -21,6 +18,5 @@ class QYCityUrlSpider(RedisSpider):
     def parse(self, response):
         selector = Selector(response)
         City_Urls = selector.re(u'{id:\'\d*\',name:\'\D*\',url:\'(http:.*)\'}')
-        r = Redis()
         if City_Urls:
-            r.lpush('myspider:qycitypage_urls', *City_Urls)
+            Redis_utils.server.lpush('myspider:qycitypage_urls', *City_Urls)

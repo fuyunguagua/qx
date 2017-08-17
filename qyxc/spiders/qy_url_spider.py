@@ -1,7 +1,6 @@
 from ..scrapy_redis.spiders import RedisSpider
 from ..items import Pbdnof58Loader
 from ..redis import Redis
-from scrapy import log
 from ..items import QYURLItem
 import re
 from ..utils import Redis_utils
@@ -24,7 +23,7 @@ class QYUrlSpider(RedisSpider):
         try:
             PageUrl = selector.re("href=\"(http:.*\d)\" class=\"ui_page_item ui_page_next\"")[0]
         except IndexError:
-            self.log('One done!'+response.url, level=log.INFO)
+            self.log('One done!'+response.url)
         #抓取本页的15个行程概览
         divitems = selector.xpath("//div[@class='items']").extract()
         for item in divitems:
@@ -42,7 +41,8 @@ class QYUrlSpider(RedisSpider):
             result['date'] = date_pattern.findall(item)
             result['lable'] = lable_pattern.findall(item)
             yield result
-       # self.log(PageUrl, level=log.DEBUG)
+       # self.log(PageUrl, level=log.DEBUG)\
+        '''
         r = Redis()
         if PageUrl != None:
             r.lpush('myspider:qycitypage_urls', PageUrl)
@@ -51,4 +51,4 @@ class QYUrlSpider(RedisSpider):
         urls = list(filter(lambda x: x.startswith('//'), urls))
         print("长度为：" + str(len(urls)))
         for url in urls:
-            r.lpush('myspider:start_urls', 'http:'+url)
+            r.lpush('myspider:start_urls', 'http:'+url)'''

@@ -2,12 +2,13 @@
 from ..scrapy_redis.spiders import RedisSpider
 from ..items import Pbdnof58Loader
 from ..redis import Redis
-from scrapy import log
 from ..items import ContryItem
 import re
 from ..utils import Redis_utils
 from time import sleep
 from scrapy.selector import Selector
+from qx.qyxc.utils import Redis_utils
+
 class QYConUrlSpider(RedisSpider):
     name = 'qy_con_spider'
     redis_key = 'myspider:qy_index_urls'
@@ -30,5 +31,5 @@ class QYConUrlSpider(RedisSpider):
                 con_item['name'] = j[1]
                 con_item['url'] = j[0]
                 con_item['con_id'] = index+1 #continent ID fk
-                r.lpush('myspider:qyconpage_urls', j[0])
+                Redis_utils.server.lpush('myspider:qyconpage_urls', j[0])
                 yield con_item
