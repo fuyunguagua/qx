@@ -14,7 +14,8 @@ BOT_NAME = 'qyxc'
 SPIDER_MODULES = ['qyxc.spiders']
 NEWSPIDER_MODULE = 'qyxc.spiders'
 
-
+LOG_FILE = './log/log' #指定日志文件
+LOG_ENCODING= 'utf-8'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENTS = [
 "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 "
@@ -64,6 +65,7 @@ CONCURRENT_REQUESTS = 32
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 DOWNLOAD_DELAY = 3
+
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -89,8 +91,11 @@ COOKIES_ENABLED = False
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
+
+
     'qyxc.middlewares.RandomUserAgent': 100,
-    'qyxc.middlewares.CompleteRequste': 200,
+    'qyxc.middlewares.CompleteRequste': 500,
+    #'qyxc.middlewares.ProxyMiddleware': 300, #代理关闭
 }
 
 # Enable or disable extensions
@@ -136,7 +141,61 @@ MYSQL_PASSWD = 'root'
 
 MONGO_CONF = dict(host='127.0.0.1', port=27017, db='qyxc')
 
+REDIS_HOST = 'localhost'
+REDIS_DB = 0
+REDIS_PORT = 6379
 
 SCHEDULER = 'scrapy_redis.scheduler.Scheduler'
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
-# end of MySQL database configure setting
+
+#proxy configure
+PROXY = [
+'117.122.240.153:8088',
+'120.27.49.85:8090',
+'60.255.186.169:8888',
+'122.192.66.50:808',
+'222.33.192.238:8118',
+'58.100.105.28:8888',
+'101.4.136.34:81',
+'123.103.93.38:80',
+'120.26.140.95:81',
+'121.40.199.105:80',
+'120.83.13.53:8080',
+'117.21.170.62:81',
+'124.238.235.135:81',
+'101.200.45.131:3128',
+'111.202.120.52:8088',
+'124.234.195.33:8888',
+'1.82.132.75:8080',
+'183.62.11.242:8088',
+'119.29.191.197:80',
+'42.81.11.22:8080',
+'58.49.236.80:8090',
+'117.21.234.107:8080',
+'139.209.90.50:80',
+'121.30.197.38:8080',
+'222.175.44.23:8081',
+'61.130.97.212:8099',
+'120.25.211.80:9999',
+'114.215.103.121:8081',
+'42.123.115.126:8090',
+'125.67.239.175:8080',
+'219.153.76.77:8080',
+'122.192.74.83:8080',
+'113.140.43.136:80',
+'121.196.226.246:84',
+'60.205.111.15:8089',
+'222.73.68.144:8090',
+'221.10.126.191:2227',
+'58.16.86.239:8080',
+'111.9.116.225:8080',
+'114.215.102.168:8081',
+'101.53.101.172:9999'
+]
+#email configure
+MAIL_TO = '16120337@bjtu.edu.cn'
+MAIL_FROM = '425006762@qq.com'
+MAIL_HOST = 'smtp.qq.com'
+MAIL_PORT = 465
+MAIL_USER = '425006762'
+MAIL_PASS = 'uvbemdczdkehbiei'
