@@ -3560,7 +3560,34 @@ def main():
 #for i in range(len(rp2.groups())):
  #   print(rp2.group(i))
 #rp1 = p1.findall(test)
-
+'''
+<tr>
+<td>122.192.66.50</td>
+<td>808</td>
+<td>江苏 </td>
+<td>
+<div class="graph"><strong class="bar" style="width: 28%; background:#dd0000;"><span></span></strong></div>
+</td>
+<td>2017-08-15 06:20:45</td>
+</tr>'''
+from qx.guojia import proxy
+list = re.findall('<tr>.*?<td>(.*?)</td>\n<td>(.*?)</td>.*?</tr>',proxy, re.S)
+proxys = dict(list[1:-1])
+for i in proxys:
+    if i == '服务器地址':
+        continue
+    #print(i,':',proxys.get(i))
+    print('\''+':'.join((i,proxys.get(i)))+'\',')
 if __name__ == '__main__':
-    main()
+    '''
+    import requests
+    class Proxy(object):
+        proxy = {}
+
+        @staticmethod
+        def get_proxy():
+            r = requests.request('GET', 'http://cn-proxy.com/')
+            print(r.text)
+
+    Proxy.get_proxy()'''
 
