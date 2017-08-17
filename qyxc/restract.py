@@ -20,19 +20,10 @@ def restractHeaderInfoForOneDay(headText):
     info['line'] = pos
     return info
 
+
 def filter_text2(text,flag):
-    if text.find(flag) is -1:
-        return text
-    else:
-        return text.replace(flag,' ')
+    return text if text.find(flag) is -1 else text.replace(flag,' ')
 
-'''
-@:parameter text 要匹配的文本
-@:parameter regex 正则表达式
-@:parameter func 对匹配结果处理的函数
-
-@:return the result as a list
-'''
 
 def restract(regex, text, func=None ):
     pattern = re.compile(regex,re.S)
@@ -44,6 +35,7 @@ def restract(regex, text, func=None ):
             func(r)
         else:
             raise Exception('参数三不可被调用')
+
 
 def showResult(list):
     for i, item in enumerate(list):
@@ -65,40 +57,18 @@ def restractPoiArticle(poiText):
     rankName = restract(bangNameRe,poiText)
     rank = restract(rankRe,poiText)
     posInfo = restract(posInfoRe,poiText)
-    if len(posName) is not 0:
-        info['posName'] = filter_text2(filter_text2(posName[0],'&nbsp;'),'\xa0')
-    else:
-        info['posName'] = ''
-
-    if len(score) is not 0:
-        info['score'] = score[0]
-    else:
-        info['score'] = ''
-
-    if len(peopleNum) is not 0:
-        info['peopleNumOfCom'] = peopleNum[0]
-    else:
-        info['peopleNumOfCom'] = ''
-
-    if len(rankName) is not 0:
-        info['rankName'] = rankName[0].replace('>','')
-    else:
-        info['rankName'] = ''
-
-    if len(rank) is not 0:
-        info['rank'] = rank[0]
-    else:
-        info['rank'] = ''
-
-    if len(posInfo) is not 0:
-        info['posInfo'] = posInfo[0].strip()
-    else:
-        info['posInfo'] = ''
+    info['posName'] = filter_text2(filter_text2(posName[0],'&nbsp;'),'\xa0') if len(posName) is not 0 else ''
+    info['score'] = score[0] if len(score) is not 0 else ''
+    info['peopleNumOfCom'] = peopleNum[0] if len(peopleNum) is not 0 else ''
+    info['rankName'] = rankName[0].replace('>', '') if len(rankName) is not 0 else ''
+    info['rank'] = rank[0] if len(rank) is not 0 else ''
+    info['posInfo'] = posInfo[0].strip() if len(posInfo) is not 0 else ''
 
     if poiText.find('自定义') is not -1:
         info['type'] = '自定义'
 
     return info
+
 
 def restractTrafficeArticle(trafficText):
     #提取traffic信息
@@ -108,6 +78,7 @@ def restractTrafficeArticle(trafficText):
     info['traffic'] = restract(artrifficRe,trafficText)
     info['sugg'] = restract(trifficSuggRe,trafficText)
     return info
+
 
 def restractHotelArticle(hotelText):
     info = dict()
@@ -130,6 +101,7 @@ def restractHotelArticle(hotelText):
         info['type'] = '自定义住宿'
     return info
 
+
 def getArtileAsListForOneDay(dayText):
     infoList = []
     articleRe = '<article.*?</article>'#当前Day的所有article
@@ -145,6 +117,7 @@ def getArtileAsListForOneDay(dayText):
         infoList.append(articleInfo)
     return infoList
 
+
 def getDistinceAsListForOneDay(dayText):
     infoList = []
     sepRe = '<div class="sep".*?</div>'#提取Day块的所有行走方式Div
@@ -155,10 +128,20 @@ def getDistinceAsListForOneDay(dayText):
         infoList.append(pattern.findall(item)[0])
     return infoList
 
+
 def getHeaderAsDict(dayText):
     headerRe = '<header>.*?</header>'
-    headerText = restract(headerRe,dayText)[0]
+    headerText = ''
+    try:
+        headerText = restract(headerRe,dayText)[0]
+    except IndexError:
+        print('出错啦!')
+        print(dayText)
+
+        exit(0)
     return restractHeaderInfoForOneDay(headerText)
+
+
 #提取每一天的信息
 def restractDayInfo(dayText):
     infoList = []
@@ -174,6 +157,7 @@ def restractDayInfo(dayText):
         infoList.append(distinceinfo)
     infoList.append(articleList[-1])
     return infoList
+
 
 class Restractor(object):
     @staticmethod

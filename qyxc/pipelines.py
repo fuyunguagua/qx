@@ -1,37 +1,41 @@
 # -*- coding: utf-8 -*-
 
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 from scrapy.exceptions import DropItem
 from twisted.enterprise import adbapi
 from .settings import MYSQL_DBNAME,MYSQL_HOST,MYSQL_PASSWD,MYSQL_USER,MONGO_CONF
 from .items import QYURLItem
 import pymysql
 import pymysql.cursors
-import pymongo
-from qx.qyxc import redis
+from .dupefilter import Dupefilter
+from qx.qyxc.utils import Redis_utils
+from qx.qyxc.utils import Mongo_utils
 from scrapy import log
 
 #处理item,空字段设为无
+#去重
 class CleanPipeline(object):
-
+    num_of_dupe = 0
     def __init__(self):
         self.has = set()
 
-    def process_item(self, item, spider):
-        r = redis.Redis()
+    def setnone(self, item):
+        item['journey_name'] = item['journey_name'][0] if item['journey_name'] else '无'
+        item['url'] = 'http:' + item['url'][0] if item['url'] else '无'
+        item['line'] = item['line'][0] if item['line'] else '无'
+        item['date'] = item['date'][0] if item['date'] else '无'
+        item['lable'] = item['lable'][0] if item['lable'] else '无'
+        item['day'] = item['day'][0] if item['day'] else 0
 
-        def setnone(item):
-            item['journey_name'] = item['journey_name'][0] if item['journey_name'] else '无'
-            item['url'] = 'http:' + item['url'][0] if item['url'] else '无'
-            item['line'] = item['line'][0] if item['line'] else '无'
-            item['date'] = item['date'][0] if item['date'] else '无'
-            item['lable'] = item['lable'][0] if item['lable'] else '无'
-            item['day'] = item['day'][0] if item['day'] else 0
+
+    def process_item(self, item, spider):
         if spider.name == 'myspider_qypage':
-            setnone(item)
+            self.setnone(item)
+            if Dupefilter.request_seen(item['url']):
+                self.num_of_dupe += 1
+                log.msg(str(self.num_of_dupe)+'has dropped!')
+                raise DropItem
+            else:
+                Redis_utils.server.lpush('myspider:start_urls', item['url'])
         return item
 
 
@@ -69,29 +73,13 @@ class MySQLPipeline(object):
 
 
 class MongoPipeline(object):
-    def __init__(self):
-        self.mongo_host = MONGO_CONF['host']
-        self.mongo_port = MONGO_CONF['port']
-        self.db_name = MONGO_CONF['db']
-    def open_spider(self,spider):
-        self.client = pymongo.MongoClient(
-            host=self.mongo_host,port=self.mongo_port)
-        self.db = self.client[self.db_name]
 
     def process_item(self, item, spider):
         choice  = {'myspider_qypage':'qy_url_info','qy_con_spider':'qy_con_info','qy_xingcheng_spider':'qy_xc_info'}
         collection_name = choice.get(spider.name, None)
-        data= dict(item)
-        if isinstance(data,dict):
-            self.db[collection_name].insert(dict(data))
-        elif isinstance(data,list):
-            self.db[collection_name].insert_many(list(data))
-        else:
-            pass
+        Mongo_utils(db='qyxc', collection=collection_name).insert_data(dict(item))
         return item
 
-    def close_spider(self,spider):
-        self.client.close()
 
 
 
